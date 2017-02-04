@@ -53,14 +53,13 @@
     dest: "{{ local_docker_ucp_backup_file }}"
     flat: yes
   become: no
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
+  run_once: true
   
 
 - name: Export the docker_ucp_controller_url fact if not defined.
   set_fact:
     docker_ucp_controller_url: "https://{{ docker_ucp_host_address }}:{{ docker_ucp_controller_port }}"
   run_once: true
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
 
 - name: Export the UCP instance fingerprint.
   shell: docker run --rm --name ucp
@@ -68,14 +67,13 @@
         docker/ucp fingerprint
   register: ucp_instance_fingerprint
   changed_when: False
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
+  run_once: true
 
 - name: Export the docker_ucp_fingerprint fact.
   set_fact:
     docker_ucp_fingerprint: "{{ ucp_instance_fingerprint['stdout'] }}"
   run_once: true
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
-
+  
 - name: Add Controller replicas to the UCP cluster.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock

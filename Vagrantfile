@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
 
   # create mgmt node
   config.vm.define :mgmt do |mgmt_config|
-      mgmt_config.vm.box = "ubuntu/trusty64"
+      mgmt_config.vm.box = "bento/centos-7.2"
       mgmt_config.vm.hostname = "mgmt"
       mgmt_config.vm.network :private_network, ip: "10.0.15.10"
       
@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
 
   (1..3).each do |i|
     config.vm.define "kin-kube-#{i}" do |node|
-        node.vm.box = "ubuntu/trusty64"
+        node.vm.box = "bento/centos-7.2"
         node.vm.hostname = "kin-kube-#{i}"
         node.vm.network :private_network, ip: "10.0.15.2#{i}"
 
