@@ -1,0 +1,33 @@
+---
+  - name: debug home dir 
+    debug: 
+      msg: "{{ ansible_env.HOME }}"
+    #become_user: "{{ ansible_ssh_user }}"
+  
+  
+  - name: Install zsh 
+    apt: name=zsh state=present
+    register: isInstalled
+
+# chsh change chell here - PAM should be modified
+  
+  - name: Cloning oh-my-zsh
+    git: 
+      repo: https://github.com/robbyrussell/oh-my-zsh
+      dest: "{{user_home}}/.oh-my-zsh"
+    sudo: yes
+    register: isCloned
+
+  - name: Cloning autosuggestion plugins of oh-my-zsh
+    git: 
+      repo: https://github.com/zsh-users/zsh-autosuggestions
+      dest: "{{user_home}}/.oh-my-zsh/plugins/zsh-autosuggestions"
+    sudo: yes
+
+  - name: Createing new ~/.zshrc 
+    template:
+      src=zshrc.in 
+      dest="{{user_home}}/.zshrc"
+    when: isCloned|success
+  
+ 

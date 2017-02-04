@@ -1,0 +1,5 @@
+---
+
+# Variables setup
+
+- include: setup_ucp_cluster.yml

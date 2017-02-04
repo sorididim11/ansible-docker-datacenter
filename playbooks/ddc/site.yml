@@ -1,0 +1,17 @@
+---
+
+- name: "Install docker CS engine"
+  hosts: docker_ucp_node
+  become: yes
+  roles:
+    - role: csengine
+  environment: "{{ proxy_env }}"
+
+
+- name: "Install UCP"
+  hosts: docker_ucp_controller
+  become: yes
+  tags: ['ucp'] 
+  roles:
+    - { role: ucp, tags: ['ucp'] } 
+  environment: "{{ proxy_env }}"

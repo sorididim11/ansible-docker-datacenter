@@ -1,0 +1,10 @@
+
+.vagrant/
+
+*.log
+
+.vscode
+
+*.md
+
+*.retry
