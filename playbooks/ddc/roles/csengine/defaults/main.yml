@@ -3,3 +3,5 @@
 docker_csengine_version: 1.11
 docker_compose_version: 1.10.0
 docker_compose_postfix: Linux-x86_64
+
+docker_cs_version: false

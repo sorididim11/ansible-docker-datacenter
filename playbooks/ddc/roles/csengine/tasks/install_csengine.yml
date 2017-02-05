@@ -4,6 +4,7 @@
   rpm_key:
     key: "{{ docker_cs_pubkey }}"
     state: present
+  when: docker_cs_version == true
 
 - name: Install yum-utils if necessary.
   yum:
@@ -12,11 +13,17 @@
 
 - name: Add the YUM Docker repository.
   yum_repository:
-    name: docker
     description: Docker CS repository.
+    name: docker
     baseurl: "{{ docker_cs_yum_repo }}"
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://yum.dockerproject.org/gpg
+  
 
-
+- name: update yum cache index
+  shell: yum makecache fast
+  
 - name: Install Docker CS Engine.
   package:
     name: docker-engine
