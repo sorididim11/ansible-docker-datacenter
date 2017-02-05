@@ -8,11 +8,13 @@
   changed_when: False
   register: ucp_controller
 
+
 - name: Upload the UCP subscription file.
   copy:
     src: "{{ local_docker_ucp_subscription_file }}"
     dest: "{{ docker_ucp_subscription_file }}"
   run_once: true
+
 
 - name: Install the first UCP controller.
   shell: docker run --rm --name ucp
@@ -28,13 +30,15 @@
         {{ docker_ucp_extra_args }}
   when: inventory_hostname == groups['docker_ucp_controller'][0] and ucp_controller['stdout'] == ""
 
+
 - name: Export the UCP instance ID.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
         docker/ucp id
   register: ucp_instance_id
   changed_when: False
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
+  run_once: true
+
 
 - name: Dump the UCP controller root CA.
   shell: docker run --rm --name ucp
@@ -46,6 +50,7 @@
   register: ucp_backup
   changed_when: False
   when: inventory_hostname == groups['docker_ucp_controller'][0]
+
 
 - name: Fetch the UCP root CA from the controller.
   fetch:
@@ -61,6 +66,7 @@
     docker_ucp_controller_url: "https://{{ docker_ucp_host_address }}:{{ docker_ucp_controller_port }}"
   run_once: true
 
+
 - name: Export the UCP instance fingerprint.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
@@ -69,11 +75,13 @@
   changed_when: False
   run_once: true
 
+
 - name: Export the docker_ucp_fingerprint fact.
   set_fact:
     docker_ucp_fingerprint: "{{ ucp_instance_fingerprint['stdout'] }}"
   run_once: true
   
+
 - name: Add Controller replicas to the UCP cluster.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
@@ -103,12 +111,8 @@
   with_items: "{{ groups['docker_ucp_node']}}" 
   run_once: true
   ignore_errors: yes
+   
   
-
-
-
-
-
 #   with togehter로 2 리스트를 한 루프에서 사용. 접근법 iter.0 , item.1
 #   tokens을 한번에 얻어서 사용가능하나  token roate 는 기존의 것을 무효화 함 따라서 마지막 토큰만 유호. 방법을 include로 바꿈 
 # - name: Create swarm tokens for workers 
