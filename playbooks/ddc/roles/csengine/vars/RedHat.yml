@@ -1,4 +1,5 @@
 ---
 
 docker_cs_yum_repo: "https://packages.docker.com/{{ docker_csengine_version }}/yum/repo/main/centos/7"
+docker_compose_link: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ docker_compose_postfix }}"
 docker_py_package: docker-py

@@ -22,9 +22,39 @@
     name: docker-engine
     state: present
 
+  
 - name: Enable the Docker daemon as a service and start it.
   service:
     name: docker.service
     state: started
     enabled: yes
 
+
+- name: Install Docker compose 
+  get_url:
+    url: "{{ docker_compose_link }}" 
+    dest: /usr/local/bin/docker-compose
+
+
+- name: Change file mode of docker-compose
+  file:
+    path:  /usr/local/bin/docker-compose
+    mode: 0755
+
+- name: Create servide dropin directroy
+  file: 
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+
+- name: Apply http_proxy to docker 
+  template:
+    src: http.conf.in  
+    dest: /etc/systemd/system/docker.service.d/http.conf
+
+- name: Reload systemd and restat docker service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker
+  changed_when: false
