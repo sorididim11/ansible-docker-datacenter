@@ -1,5 +1,6 @@
 ---
 
+docker_ucp_version: 1.1.0
 docker_ucp_admin_username: admin
 docker_ucp_admin_password: Rlawhdrjs2@
 
@@ -12,7 +13,7 @@ docker_ucp_host_address: "{{ ansible_default_ipv4['address'] }}"
 #docker_ucp_controller_url: "ucp.docker.lan"
 #docker_ucp_san:
 #  - ucp.docker.lan
-docker_ucp_san: ""
+docker_ucp_san: "16.202.65.235"
 docker_ucp_extra_args: ""
 #docker_ucp_extra_args: "--disable-tracking --disable-usage --binpack"
 
