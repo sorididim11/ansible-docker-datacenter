@@ -1,7 +1,7 @@
 ---
 
 - name: "Install docker CS engine"
-  hosts: docker_ucp_node
+  hosts: docker_csengine
   become: yes
   roles:
     - role: csengine
