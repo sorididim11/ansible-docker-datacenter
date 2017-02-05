@@ -3,4 +3,5 @@
 # Variables setup
 - include_vars: "{{ ansible_os_family }}.yml"
   
-- include: install_csengine.yml
+- include: "install_{{ docker_type }}.yml"
+  
