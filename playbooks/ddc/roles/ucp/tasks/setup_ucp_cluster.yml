@@ -45,7 +45,7 @@
         creates={{ docker_ucp_backup_file }}
   register: ucp_backup
   changed_when: False
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
+  run_once: yes
 
 - name: Fetch the UCP root CA from the controller.
   fetch:
@@ -74,7 +74,6 @@
   set_fact:
     docker_ucp_fingerprint: "{{ ucp_instance_fingerprint['stdout'] }}"
   run_once: true
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
 
 - name: Add Controller replicas to the UCP cluster.
   shell: docker run --rm --name ucp
