@@ -4,7 +4,7 @@
   hosts: docker_csengine
   become: yes
   roles:
-    - role: csengine
+    - role: docker
   environment: "{{ proxy_env }}"
 
 

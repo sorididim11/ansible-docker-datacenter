@@ -6,15 +6,18 @@
     state: present
 
 
-- name: Add the YUM Docker repository.
-  yum_repository:
-    description: Docker repository.
-    name: docker
-    baseurl: "{{ docker_cs_yum_repo }}"
-    gpgcheck: yes
-    enabled: yes
-    gpgkey: "{{ docker_cs_pubkey }}" 
-  
+# - name: Add the YUM Docker repository.
+#   yum_repository:
+#     description: Docker repository.
+#     name: docker
+#     baseurl: "{{ docker_cs_yum_repo }}"
+    #gpgcheck: yes
+    #enabled: yes
+    #gpgkey: "{{ docker_cs_pubkey }}" 
+
+- name: Add the YUM Docker repository
+  shell: yum-config-manager --add-repo https://docs.docker.com/engine/installation/linux/repo_files/centos/docker.repo
+
 
 - name: update yum cache index
   shell: yum makecache fast
