@@ -4,4 +4,8 @@ docker_csengine_version: 1.12
 docker_compose_version: 1.10.0
 docker_compose_postfix: Linux-x86_64
 
+
 docker_type: engine
+docker_package_name: docker-engine
+
+is_csengine: "{{ docker_type == 'csengine' }}"
