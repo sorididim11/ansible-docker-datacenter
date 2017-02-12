@@ -5,7 +5,9 @@ docker_compose_version: 1.10.0
 docker_compose_postfix: Linux-x86_64
 
 
+#input csengine or engine for open source
 docker_type: engine
 docker_package_name: docker-engine
 
+#True or False
 is_csengine: "{{ docker_type == 'csengine' }}"
