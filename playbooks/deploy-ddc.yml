@@ -1,0 +1,10 @@
+
+---
+
+- name: "Install UCP"
+  hosts: docker_ucp_controller
+  become: yes
+  tags: ['ucp'] 
+  roles:
+    - { role: ucp, tags: ['ucp'] } 
+  environment: "{{ proxy_env }}"

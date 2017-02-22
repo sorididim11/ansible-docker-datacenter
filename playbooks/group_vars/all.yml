@@ -1,0 +1,5 @@
+# The global variable file DDC installation
+
+proxy_env:
+  http_proxy: http://web-proxy.corp.hp.com:8080
+  https_proxy: http://web-proxy.corp.hp.com:8080

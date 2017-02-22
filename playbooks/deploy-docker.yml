@@ -1,0 +1,9 @@
+
+---
+
+- name: "Install docker CS engine"
+  hosts: docker_csengine
+  become: yes
+  roles:
+    - role: docker
+  environment: "{{ proxy_env }}"

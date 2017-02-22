@@ -1,0 +1,28 @@
+---
+
+- name: Create swarm tokens for workers 
+  shell: docker swarm join-token worker -q --rotate
+  register: token
+
+
+- name: Add Nodes to the UCP cluster.
+  action: shell docker swarm join  --token {{ token.stdout }}  {{ docker_ucp_host_address }}
+  delegate_to: "{{ item }}"
+
+
+# - name: Get the certificates used by UCP 
+#   get_url: 
+#     url:  https://"{{ docker_ucp_host_address }}"/ca 
+#     dest: /tmp/ucp-ca.pem
+#   delegate_to: "{{ item }}"
+
+# - name: install DTR 
+#   shell: bash && docker run -it --rm 
+#           docker/dtr install
+#           --ucp-url {{ groups['docker_ucp_node'][0]  }} 
+#           --ucp-node {{ hostvars[groups['docker_ucp_node'][0]].ansible_hostname }}
+#           --dtr-external-url {{ groups['docker_ucp_node'][0] }}
+#           --ucp-username {{ docker_ucp_admin_username }}
+#           --ucp-password {{ docker_ucp_admin_password }} 
+#           --ucp-ca ${cat /tmp/ucp-ca.pem}
+#   delegate_to: "{{ item }}"

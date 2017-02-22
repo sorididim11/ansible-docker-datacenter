@@ -1,0 +1,28 @@
+---
+
+docker_ucp_version: 2.1.0
+docker_ucp_admin_username: admin
+docker_ucp_admin_password: hpinvent
+
+# offline UCP install
+is_ucp_offline_install: yes
+docker_ucp_package_file: "ucp_images_2.1.0.tar.gz"
+
+# DDC license 
+local_docker_ucp_subscription_file: "files/docker_subscription.lic"
+docker_ucp_subscription_file: "/root/docker_subscription.lic"
+
+docker_ucp_swarm_port: 2376
+docker_ucp_controller_port: 443
+docker_ucp_host_address: "{{ ansible_default_ipv4['address'] }}"
+#docker_ucp_controller_url: "ucp.docker.lan"
+#docker_ucp_san:
+#  - ucp.docker.lan
+docker_ucp_san:
+  - 16.202.67.137
+docker_ucp_extra_args: ""
+#docker_ucp_extra_args: "--disable-tracking --disable-usage --binpack"
+
+docker_ucp_backup_passfrase: ""
+docker_ucp_backup_file: /tmp/ucp-backup.tar
+local_docker_ucp_backup_file: /tmp/ucp-backup.tar
