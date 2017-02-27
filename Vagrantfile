@@ -1,6 +1,5 @@
 
-Vagrant.configure("2") do |config|
-
+Vagrant.configure('2') do |config|
   config.vm.box = 'centos/7'
 
   config.vm.provider 'virtualbox' do |vb|
@@ -8,11 +7,12 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define 'mgmt' do |mgmt|
-    mgmt.vm.hostname = "mgmt"
+    mgmt.vm.hostname = 'mgmt'
     mgmt.vm.network :private_network, ip: '192.168.77.20'
     mgmt.vm.provision :ansible_local do |ansible|
       ansible.playbook = 'playbooks/site.yml'
       ansible.inventory_path = 'playbooks/stage'
+      ansible.verbose = true
     end
   end
 
