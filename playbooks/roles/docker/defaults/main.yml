@@ -2,3 +2,6 @@
 
 docker_csengine_version: 1.12
 docker_type: engine
+docker_package_name: docker-engine
+
+is_csengine: "{{ docker_type == 'csengine' }}"

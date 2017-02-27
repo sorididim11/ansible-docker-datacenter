@@ -12,18 +12,18 @@
     state: present
 
 
-- name: Add the YUM Docker repository.
-  yum_repository:
-    description: Docker Repository.
-    name: docker
-    baseurl: "{{ docker_yum_repo }}"
-    enabled: yes
+# - name: Add the YUM Docker repository.
+#   yum_repository:
+#     description: Docker Repository.
+#     name: docker
+#     baseurl: "{{ docker_yum_repo }}"
+#     enabled: yes
 
-# - name: Add the YUM Docker repository
-#   shell: yum-config-manager --add-repo {{ docker_yum_repo }}
+- name: Add the YUM Docker repository
+  shell: yum-config-manager --add-repo {{ docker_yum_repo }}
 
-# - name: update yum cache index
-#   shell: yum makecache fast
+- name: update yum cache index
+  shell: yum makecache fast
   
 
 - name: Install Docker CS Engine.

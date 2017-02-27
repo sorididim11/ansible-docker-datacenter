@@ -81,6 +81,7 @@
     docker_ucp_fingerprint: "{{ ucp_instance_fingerprint['stdout'] }}"
   run_once: true
   
+  
 
 - name: Add Controller replicas to the UCP cluster.
   shell: docker run --rm --name ucp
