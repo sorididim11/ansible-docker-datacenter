@@ -20,7 +20,7 @@
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
         -v {{ docker_ucp_subscription_file }}:/docker_subscription.lic
-        docker/ucp install
+        docker/ucp:{{ docker_ucp_version }} install
         --admin-username {{ docker_ucp_admin_username }}
         --admin-password {{ docker_ucp_admin_password }}
         --swarm-port {{ docker_ucp_swarm_port }}
@@ -34,7 +34,7 @@
 - name: Export the UCP instance ID.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
-        docker/ucp id
+        docker/ucp:{{ docker_ucp_version }} id
   register: ucp_instance_id
   changed_when: False
   run_once: true
@@ -44,7 +44,7 @@
 - name: Dump the UCP controller root CA.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
-        docker/ucp backup --id {{ ucp_instance_id['stdout'] }}
+        docker/ucp:{{ docker_ucp_version }} backup --id {{ ucp_instance_id['stdout'] }}
         {% if docker_ucp_backup_passfrase is defined and docker_ucp_backup_passfrase != "" %}--passfrase {{ docker_ucp_backup_passfrase }}{% endif %}
         > {{ docker_ucp_backup_file }}
         creates={{ docker_ucp_backup_file }}
@@ -71,7 +71,7 @@
 - name: Export the UCP instance fingerprint.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
-        docker/ucp fingerprint
+        docker/ucp:{{ docker_ucp_version }} fingerprint
   register: ucp_instance_fingerprint
   changed_when: False
   run_once: true
