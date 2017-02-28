@@ -49,11 +49,17 @@
   template:
     src: http.conf.in  
     dest: /etc/systemd/system/docker.service.d/http.conf
+  notify: Reload systemd
 
 
-- name: Reload systemd and restat docker service
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: docker
-  changed_when: false
+- name: Get docker restarted
+  command: /bin/true
+  notify: Restart docker 
+
+# from ansible version 2.2
+# - name: Reload systemd and restat docker service
+#   systemd:
+#     state: restarted
+#     daemon_reload: yes
+#     name: docker
+#   changed_when: false
