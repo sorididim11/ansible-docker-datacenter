@@ -1,17 +1,18 @@
 
 [docker_csengine]
-localhost ansible_connection=local 
-kin-1
-kin-2
+kin-kube-1 ansible_user=hos
+kin-kube-2 ansible_user=hos
+kin-kube-3 ansible_user=hos
+
 
 [docker_ucp_controller]
-localhost ansible_connection=local 
+kin-kube-1 ansible_user=hos
 
 
 [docker_ucp_node]
-kin-1
-kin-2
+kin-kube-2 ansible_user=hos
+kin-kube-3 ansible_user=hos
 
 
 [docker_dtr]
-kin-1
+kin-kube-2 ansible_user=hos
