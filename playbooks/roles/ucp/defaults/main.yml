@@ -6,8 +6,8 @@ docker_ucp_admin_password: hpinvent
 
 # offline UCP install
 is_ucp_offline_install: yes
-docker_ucp_package_file: "ucp_images_2.1.0.tar.gz"
-docker_dtr_package_file: "dtr_2.2.0.tar.gz"
+docker_ucp_package_file: "ucp_dtr.tar.gz"
+docker_dtr_package_file: "ucp_dtr.tar.gz"
 
 # DDC license 
 local_docker_ucp_subscription_file: "files/docker_subscription.lic"
