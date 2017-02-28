@@ -9,7 +9,7 @@
 
 - name: install DTR 
   shell: docker run -it --rm 
-          docker/dtr install
+          docker/dtr:{{ docker_dtr_version }} install
           --ucp-url {{ groups['docker_ucp_node'][0]  }} 
           --ucp-node {{ hostvars[groups['docker_ucp_node'][0]].ansible_hostname }}
           --dtr-external-url {{ groups['docker_ucp_node'][0] }}
