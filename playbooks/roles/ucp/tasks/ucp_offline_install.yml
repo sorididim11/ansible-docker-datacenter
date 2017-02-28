@@ -17,3 +17,20 @@
   changed_when: False
   run_once: yes
 
+
+- name: Copy DTR package file to all nodes 
+  copy:
+    src: "{{ docker_dtr_package_file }}"
+    dest: "/tmp/{{ docker_dtr_package_file }}"  
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['docker_dtr'] }}"
+  run_once: yes
+
+
+- name: import DTR images 
+  shell: docker load < /tmp/{{ docker_dtr_package_file }}
+  delegate_to: "{{ item }}"
+  with_items: "{{ groups['docker_dtr'] }}"
+  changed_when: False
+  run_once: yes
+
