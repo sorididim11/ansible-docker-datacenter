@@ -30,4 +30,6 @@
       dest="{{user_home}}/.zshrc"
     when: isCloned|success
   
+  - name: Chanage to zsh 
+    user:  "name={{ansible_user_id}} shell=/usr/local/bin/zsh"
  
