@@ -40,6 +40,7 @@
   run_once: true
 
 
+
 - name: Dump the UCP controller root CA.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
