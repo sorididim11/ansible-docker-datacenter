@@ -7,17 +7,17 @@ Vagrant.configure('2') do |config|
     vb.memory = '1024'
   end
 
-  #ssh_pub_key = File.readlines('./key/id_rsa.pub').first.strip
-  #ssh_pri_key = File.readlines('./key/id_rsa')
+  ssh_pub_key = File.readlines('./key/id_rsa.pub').first.strip
+  ssh_pri_key = File.readlines('./key/id_rsa')
 
-  N = 2
+  N = 1
 
   (1..N).each do |machine_id|
     hostname = "kin-#{machine_id}"
     config.vm.define hostname do |node|
       node.vm.hostname = hostname
       node.vm.network :private_network, ip: "192.168.77.#{20 + machine_id}"
-      #node.vm.provision :shell, inline: "echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys"
+      node.vm.provision :shell, inline: "echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys"
     end
   end
 
@@ -25,10 +25,10 @@ Vagrant.configure('2') do |config|
     mgmt.vm.box = 'ubuntu/trusty64'
     mgmt.vm.hostname = 'mgmt'
     mgmt.vm.network :private_network, ip: '192.168.77.20'
-    #mgmt.vm.provision :shell, inline: "echo #{ssh_pri_key} > /home/vagrant/.ssh/id_rsa"
+    mgmt.vm.provision :shell, inline: "echo #{ssh_pri_key} > /home/vagrant/.ssh/id_rsa"
     mgmt.vm.provision :ansible_local do |ansible|
-      ansible.playbook = 'playbooks/site.yml'
-      ansible.inventory_path = 'playbooks/stage'
+      ansible.playbook = 'playbooks/deploy-ohmyzsh.yml'
+      ansible.inventory_path = 'playbooks/dev'
       ansible.limit = "all"
       #ansible.verbose = true
     end

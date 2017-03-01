@@ -1,0 +1,16 @@
+
+[docker_csengine]
+kin-kube-1 ansible_user=hos
+kin-kube-2 ansible_user=hos
+
+
+[docker_ucp_controller]
+kin-kube-1 ansible_user=hos
+
+
+[docker_ucp_node]
+kin-kube-2 ansible_user=hos
+
+
+[docker_dtr]
+kin-kube-2 ansible_user=hos
