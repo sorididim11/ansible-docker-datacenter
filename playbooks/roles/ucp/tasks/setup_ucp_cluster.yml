@@ -110,11 +110,17 @@
 # 한 루프에서 여러개의 태스크를 수행하기 위해 include 사용 
 - name: Bootstrap worker nodes to cluster 
   include : bootstrap_nodes.yml  
-  with_items: "{{ groups['docker_ucp_node']}}" 
+  with_items: "{{ groups['docker_ucp_node'] }}" 
   run_once: true
   ignore_errors: yes
    
   
+# - name: Deploy DTR
+#   include: deploy_dtr.yml
+#   with_items: "{{ groups['docker_dtr'] }}"
+#   run_once: true
+
+
 #   with togehter로 2 리스트를 한 루프에서 사용. 접근법 iter.0 , item.1
 #   tokens을 한번에 얻어서 사용가능하나  token roate 는 기존의 것을 무효화 함 따라서 마지막 토큰만 유호. 방법을 include로 바꿈 
 # - name: Create swarm tokens for workers 
