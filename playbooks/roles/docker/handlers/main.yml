@@ -7,8 +7,8 @@
 - name: Restart docker 
   command: /bin/true
   notify: 
-    - stop docker 
-    - start docker 
+    - Stop docker 
+    - Start docker 
 
 
 - name: Stop docker 

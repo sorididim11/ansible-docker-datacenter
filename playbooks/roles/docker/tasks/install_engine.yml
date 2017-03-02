@@ -43,6 +43,7 @@
   file: 
     path: /etc/systemd/system/docker.service.d
     state: directory
+  when: http_proxy is defined
 
 
 - name: Apply http_proxy to docker 
@@ -50,7 +51,7 @@
     src: http.conf.in  
     dest: /etc/systemd/system/docker.service.d/http.conf
   notify: Reload systemd
-
+  when: http_proxy is defined
 
 - name: Get docker restarted
   command: /bin/true
