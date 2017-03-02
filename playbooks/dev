@@ -1,16 +1,20 @@
 
+
+
 [docker_csengine]
-kin-kube-1 ansible_user=hos
-kin-kube-2 ansible_user=hos
+mgmt ansible_connection=local 
+kin-1  ansible_ssh_host=192.168.77.21 ansible_ssh_private_key_file=/vagrant/.vagrant/machines/kin-1/virtualbox/private_key
+kin-2  ansible_ssh_host=192.168.77.22 ansible_ssh_private_key_file=/vagrant/.vagrant/machines/kin-2/virtualbox/private_key
 
 
 [docker_ucp_controller]
-kin-kube-1 ansible_user=hos
+mgmt
 
 
 [docker_ucp_node]
-kin-kube-2 ansible_user=hos
+kin-1
+kin-2
 
 
 [docker_dtr]
-kin-kube-2 ansible_user=hos
+kin-1
