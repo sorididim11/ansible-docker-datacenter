@@ -9,10 +9,7 @@ export TERM="xterm-256color"
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="steeef"
-ZSH_THEME="dpoggi"
-
-export http_proxy={{proxy_url}}
-export https_proxy={{proxy_url}}
+ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"

@@ -109,7 +109,7 @@
 
 # 한 루프에서 여러개의 태스크를 수행하기 위해 include 사용 
 - name: Bootstrap worker nodes to cluster 
-  include : bootstrap_nodes.yml  
+  include : join-ucp-cluster.yml  
   with_items: "{{ groups['docker_ucp_node'] }}" 
   run_once: true
   ignore_errors: yes
