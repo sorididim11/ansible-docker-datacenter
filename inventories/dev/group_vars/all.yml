@@ -1,8 +1,9 @@
 # The global variable file DDC installation
 docker_package: docker-ce  #docker-ee, docker-ce, docker
 docker_version: 17.06.2.ce # 17.06.2.ee.6, 17.06.2.ce
-docker_storage_driver: overlay2 # overlay2(recommended for both ubuntu and centos) or devicemapper(centos/redhat. it must use direct-lvm mode), aufs(ubuntu)
-
+# overlay2(recommended for both ubuntu and centos) or devicemapper(centos/redhat. it must use direct-lvm mode), aufs(ubuntu)
+# overlay2(keranl 4.0 or higher required but docker-ee can use with kernal 3.10-693 or above)
+docker_storage_driver: overlay2 
 proxy_env:
   dummy: dummy
   #http_proxy: http://web-proxy.corp.hp.com:8080
