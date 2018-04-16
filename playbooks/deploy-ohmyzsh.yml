@@ -1,7 +1,6 @@
 
 --- 
-- hosts: bootstrap 
+- hosts: docker_bootstrap 
   become: yes
-  become_user: vagrant
   roles:
     - role: ohmyzsh

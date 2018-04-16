@@ -1,14 +1,10 @@
-
-
-
 [docker_masters]
-mgmt
 
+[docker_slaves]
 
-[docker_ucp_node]
-kin-1
-kin-2
+[docker_bootstrap]
+10.0.15.11
 
-
-[docker_dtr]
-kin-1
+[docker_nodes:children]
+docker_masters
+docker_slaves

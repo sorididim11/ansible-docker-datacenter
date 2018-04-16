@@ -10,3 +10,5 @@
 *.retry
 
 *.gz
+
+.DS_Store

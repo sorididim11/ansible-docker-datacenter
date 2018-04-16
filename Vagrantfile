@@ -3,22 +3,26 @@ require 'vagrant/ui'
 
 UI = Vagrant::UI::Colored.new
 
-guest_home_dir = '/home/vagrant'
 settings = YAML.load_file 'vagrantConf.yml'
 
+# Check if vagrant confile is in valid order. dcos_bootstrap should be at the bottom of config file
+UI.info 'Checking if the location of dcos_boostrap of vagrantConf.xml is valid...', bold: true
+if settings[settings.keys.last]['type'] != 'docker_bootstrap'
+  UI.error 'Please put dcos_bootstrap at the bottom of vagrantConf.yml because of provisioning order ', bold: true
+  exit(-1)
+end
 
 # create dynamic inventory file. ansible provisioner 's dynamic inventory got some bugs
 UI.info 'Create ansible dynamic inventory file...', bold: true
 inventory_file = 'inventories/dev/hosts'
 File.open(inventory_file, 'w') do |f|
-  %w(bootstrap docker_masters docker_slaves).each do |section|
+  %w(docker_masters docker_slaves docker_bootstrap).each do |section|
     f.puts("[#{section}]")
+    settings.each do |_, machine_info|
+      f.puts(machine_info['ip']) if machine_info['type'] == section
+    end
+    f.puts('')
   end
-    
-  settings.each do |_, machine_info|
-    f.puts(machine_info['ip']) if machine_info['type'] == section
-  end
-  f.puts('')
   f.write("[docker_nodes:children]\ndocker_masters\ndocker_slaves")
 end
 
@@ -48,7 +52,6 @@ Vagrant.configure('2') do |config|
     config.proxy.no_proxy = no_proxy
   end
 
-
   settings.each do |name, machine_info|
     config.vm.define name do |node|
       node.vm.hostname = machine_info['name']
@@ -65,14 +68,21 @@ Vagrant.configure('2') do |config|
       end
 
       if machine_info['name'] == 'bootstrap'
+        ssh_prv_key = File.read("#{Dir.home}/.vagrant.d/insecure_private_key")
+        UI.info 'Insert vagrant insecure key to bootstreap node...', bold: true
+        node.vm.provision 'shell' do |sh|
+          sh.inline = <<-SHELL
+            [ ! -e /home/vagrant/.ssh/id_rsa ] && echo "#{ssh_prv_key}" > /home/vagrant/.ssh/id_rsa && chown vagrant:vagrant /home/vagrant/.ssh/id_rsa && chmod 600 /home/vagrant/.ssh/id_rsa
+            echo Provisioning of ssh keys completed [Success].
+          SHELL
+        end
+
         node.vm.provision :ansible_local do |ansible|
           ansible.install_mode = :pip # or default( by os package manager)
           ansible.version = '2.4.3.0'
           ansible.config_file = 'ansible.cfg'
           ansible.inventory_path = inventory_file
           ansible.limit = 'all'
-
-          # ansible.playbook = 'ansible/playbooks/util-config-ohmyzsh.yml'
           ansible.playbook = 'site.yml'
           ansible.verbose = 'true'
         end

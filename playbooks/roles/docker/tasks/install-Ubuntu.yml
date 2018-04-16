@@ -15,9 +15,12 @@
 
 
 - name: Add the YUM Docker repository in CentOS
-  yum_repository:
-    name: "{{ docker_package }}"
-    description: Docker Repository.
-    baseurl: "{{ docker_repo }}"
-    enabled: yes
+  shell: "yum-config-manager --add-repo {{ docker_repo }}"
+
+  # yum_repository:
+  #   name: "{{ docker_package }}"
+  #   file: external_repos
+  #   description: Docker Repository.
+  #   baseurl: "{{ docker_repo }}"
+  #   enabled: yes
 

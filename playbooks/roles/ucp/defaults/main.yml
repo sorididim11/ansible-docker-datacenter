@@ -7,7 +7,7 @@ docker_ucp_admin_password: hpinvent
 
 #docker_ucp_version: "{{ docker_ucp_version if docker_ucp_version is not defined else  latest }}"
 # offline UCP install
-is_ucp_offline_install: yes
+is_ucp_offline_install: no
 docker_ucp_package_file: "ucp_dtr.tar.gz"
 docker_dtr_package_file: "ucp_dtr.tar.gz"
 

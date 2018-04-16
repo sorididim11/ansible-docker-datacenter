@@ -7,45 +7,11 @@ m1:
    mem: 2000
    type: docker_masters
 
-m2:
-   name: masters2
-   ip: 10.0.15.22
-   cpus: 2
-   mem: 2000
-   type: docker_masters
-
-m3:
-   name: masters3
-   ip: 10.0.15.23
-   cpus: 2
-   mem: 2000
-   type: docker_masters
-
-s1:
-   name: slave1
-   ip: 10.0.15.31
-   cpus: 3
-   mem: 2000
-   type: docker_slaves
-
-s2:
-   name: slave2
-   ip: 10.0.15.32
-   cpus: 3
-   mem: 3000
-   type: docker_slaves
-
-s3:
-   name: slave3
-   ip: 10.0.15.33
-   cpus: 3
-   mem: 3000
-   type: docker_slaves
 
 boot:
    name: bootstrap
-   ip: 10.0.15.33
-   cpus: 3
-   mem: 3000
+   ip: 10.0.15.11
+   cpus: 2
+   mem: 1000
    type: docker_bootstrap
 

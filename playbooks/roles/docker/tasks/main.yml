@@ -3,14 +3,14 @@
 # Variables setup
 
 - debug:
-    msg: "docker package? {{ docker_type }}, linux distro: {{ansible_distribution}}, docker ver: {{docker_version}}"
+    msg: "docker package? {{ docker_package }}, linux distro: {{ansible_distribution}}, docker ver: {{docker_version}}"
 
 # something wrong with include_vars, if i use expresseion above directly here so. use variable using set_fact
-- include: "install-{{docker_type}}.yml"
+- include: "install-{{ansible_distribution}}.yml"
 
 - name: Install required utils for docker
   package: name={{item}} state=present
-  with_items: "{{ dcos_required_utils }}"
+  with_items: "{{ docker_required_utils }}"
 
 
 - name: Create docker.service dropin directroy
@@ -19,10 +19,18 @@
     state: directory
 
 
-- name: Configure systemd to run the Docker Daemon with OverlayFS
-  template:
-    src: override.conf.in
-    dest: /etc/systemd/system/docker.service.d/override.conf
+# - name: Enable overlayfs
+#   lineinfile: dest=/etc/modules-load.d/overlay2.conf regexp="^overlay2" line=overlay2 state=present create=yes
+
+
+# - name: Load overyfs to kernel 
+#   modprobe: name=overlay2 state=present
+
+
+# - name: Configure systemd to run the Docker Daemon with OverlayFS
+#   template:
+#     src: override.conf.in
+#     dest: /etc/systemd/system/docker.service.d/override.conf
 
 
 - name: Configure systemd to run the Docker Daemon with Http proxy 
@@ -32,7 +40,7 @@
   when: proxy_env.http_proxy is defined
 
 # makecache is added whenever update_cache: yes
-- name: Install Docker Engine & Selinux 
+- name: Install docker 
   package: name={{docker_package}}-{{ docker_version }} state=present #update_cache=yes
 
 

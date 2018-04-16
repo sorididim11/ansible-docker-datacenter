@@ -2,7 +2,7 @@
 
 - assert:
     that: ansible_distribution == "RedHat" 
-    msg: Redhat docker_type only support in RHEL 
+    msg: Redhat docker package only support in RHEL 
 
 - set_fact:
     docker_pkg_name: docker

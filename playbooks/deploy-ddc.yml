@@ -2,7 +2,7 @@
 ---
 
 - name: "Install UCP"
-  hosts: docker_ucp_controller
+  hosts: docker_masters
   become: yes
   tags: ['ucp'] 
   roles:

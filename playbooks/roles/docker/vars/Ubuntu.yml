@@ -7,7 +7,7 @@ docker_ee_key: "{{ docker_ee_url }}/ubuntu/gpg"
 docker_ee_repo: "{{ docker_ee_url }}/ubuntu/docker-ee.repo"
 docker_repo:
 
-docker_requried_utils:
+docker_required_utils:
   - apt-transport-https
   - ca-certificates
   - curl
