@@ -7,4 +7,5 @@
   tags: ['ucp'] 
   roles:
     - { role: ucp, tags: ['ucp'] } 
+    - { role: dtr, tags: ['ucp'] } 
   environment: "{{ proxy_env }}"
