@@ -18,6 +18,14 @@
     path: /etc/systemd/system/docker.service.d
     state: directory
 
+# check kernal version here to check if overlay2 can be used
+
+
+- name: Generate docker daemon.json
+  template:
+    src: daemon.json.in
+    dest: /etc/docker/daemon.json
+
 
 # - name: Enable overlayfs
 #   lineinfile: dest=/etc/modules-load.d/overlay2.conf regexp="^overlay2" line=overlay2 state=present create=yes
