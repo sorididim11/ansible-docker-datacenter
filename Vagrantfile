@@ -15,11 +15,10 @@ File.open(inventory_file, 'w') do |f|
     f.puts("[#{section}]")
   end
     
-    settings.each do |_, machine_info|
-      f.puts(machine_info['ip']) if machine_info['type'] == section
-    end
-    f.puts('')
+  settings.each do |_, machine_info|
+    f.puts(machine_info['ip']) if machine_info['type'] == section
   end
+  f.puts('')
   f.write("[docker_nodes:children]\ndocker_masters\ndocker_slaves")
 end
 
