@@ -1,0 +1,12 @@
+---
+
+# variables for both docker-ce and docker-ee
+docker_ce_repo: https://download.docker.com/linux/centos/docker-ce.repo
+docker_ee_url: 
+docker_ee_repo: "{{docker_ee_url}}/centos/docker-ee.repo"
+docker_repo: "{{ docker_type == 'docker-ee' | ternary(docker_ee_repo, docker_ce_repo) }}"
+
+docker_requried_utils:
+  - yum-utils 
+  - device-mapper-persistent-data
+  - lvm2
