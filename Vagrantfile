@@ -13,6 +13,7 @@ inventory_file = 'inventories/dev/hosts'
 File.open(inventory_file, 'w') do |f|
   %w(bootstrap docker_masters docker_slaves).each do |section|
     f.puts("[#{section}]")
+  end
     
     settings.each do |_, machine_info|
       f.puts(machine_info['ip']) if machine_info['type'] == section
