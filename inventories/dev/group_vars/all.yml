@@ -1,6 +1,7 @@
 # The global variable file DDC installation
 docker_package: docker-ee
 docker_version: 17.06.ee
+docker_storage_driver: overlay2 # overlay2(recommended for both ubuntu and centos) or devicemapper(centos), aufs(ubuntu)
 
 proxy_env:
   http_proxy: http://web-proxy.corp.hp.com:8080

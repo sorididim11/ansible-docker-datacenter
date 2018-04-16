@@ -1,0 +1,5 @@
+- include: playbooks/deploy-ohmyzsh.yml
+
+- include: playbooks/deploy-docker.yml
+
+- include: playbooks/deploy-ddc.yml

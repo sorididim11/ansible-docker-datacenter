@@ -16,8 +16,8 @@
 
 
 - name: Configure systemd to run the Docker Daemon with OverlayFS
-  copy:
-    src: override.conf
+  template:
+    src: override.conf.in
     dest: /etc/systemd/system/docker.service.d/override.conf
 
 
