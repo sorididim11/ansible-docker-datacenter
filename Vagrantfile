@@ -64,11 +64,11 @@ Vagrant.configure('2') do |config|
         vb.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 1000]
       end
 
-
+      if machine_info['name'] == 'bootstrap'
         node.vm.provision :ansible_local do |ansible|
           ansible.install_mode = :pip # or default( by os package manager)
           ansible.version = '2.4.3.0'
-          ansible.config_file = 'ansible/ansible.cfg'
+          ansible.config_file = 'ansible.cfg'
           ansible.inventory_path = inventory_file
           ansible.limit = 'all'
 
@@ -76,6 +76,7 @@ Vagrant.configure('2') do |config|
           ansible.playbook = 'site.yml'
           ansible.verbose = 'true'
         end
+      end
     end
   end
 end

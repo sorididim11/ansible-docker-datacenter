@@ -3,4 +3,4 @@
 docker_version: 17.03.ce
 docker_package: docker-ee # docker-ce, docker
 docker_py_package: docker-py
-docker_storage_driver: overlay2
+docker_storage_driver: overlay2 # overlay2 or devicemapper(must use direct-lvm mode) 
