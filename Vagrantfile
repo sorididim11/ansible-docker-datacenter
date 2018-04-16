@@ -9,7 +9,7 @@ settings = YAML.load_file 'vagrantConf.yml'
 
 # create dynamic inventory file. ansible provisioner 's dynamic inventory got some bugs
 UI.info 'Create ansible dynamic inventory file...', bold: true
-inventory_file = 'ansible/inventories/dev/hosts'
+inventory_file = 'inventories/dev/hosts'
 File.open(inventory_file, 'w') do |f|
   %w(docker_masters docker_slaves).each do |section|
     f.puts("[#{section}]")
@@ -77,7 +77,6 @@ Vagrant.configure('2') do |config|
           ansible.verbose = 'true'
           ansible.vault_password_file = guest_home_dir + '/password' if dcos_config['dcos_is_enterprise']
         end
-      end
     end
   end
 end
