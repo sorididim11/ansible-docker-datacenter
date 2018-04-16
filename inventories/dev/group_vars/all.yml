@@ -1,4 +1,6 @@
 # The global variable file DDC installation
+docker_package: docker-ee
+docker_version: 17.06.ee
 
 proxy_env:
   http_proxy: http://web-proxy.corp.hp.com:8080
