@@ -11,7 +11,7 @@ settings = YAML.load_file 'vagrantConf.yml'
 UI.info 'Create ansible dynamic inventory file...', bold: true
 inventory_file = 'inventories/dev/hosts'
 File.open(inventory_file, 'w') do |f|
-  %w(docker_masters docker_slaves).each do |section|
+  %w(bootstrap docker_masters docker_slaves).each do |section|
     f.puts("[#{section}]")
     
     settings.each do |_, machine_info|

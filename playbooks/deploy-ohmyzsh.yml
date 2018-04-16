@@ -1,6 +1,6 @@
 
 --- 
-- hosts: all 
+- hosts: bootstrap 
   become: yes
   become_user: vagrant
   roles:

@@ -42,4 +42,10 @@ s3:
    mem: 3000
    type: docker_slaves
 
+boot:
+   name: bootstrap
+   ip: 10.0.15.33
+   cpus: 3
+   mem: 3000
+   type: docker_bootstrap
 
