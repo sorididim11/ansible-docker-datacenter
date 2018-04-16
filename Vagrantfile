@@ -73,9 +73,8 @@ Vagrant.configure('2') do |config|
           ansible.limit = 'all'
 
           # ansible.playbook = 'ansible/playbooks/util-config-ohmyzsh.yml'
-          ansible.playbook = 'ansible/vagrantSite.yml'
+          ansible.playbook = 'site.yml'
           ansible.verbose = 'true'
-          ansible.vault_password_file = guest_home_dir + '/password' if dcos_config['dcos_is_enterprise']
         end
     end
   end

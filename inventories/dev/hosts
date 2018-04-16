@@ -1,13 +1,7 @@
 
 
 
-[docker_csengine]
-mgmt ansible_connection=local 
-kin-1  ansible_ssh_host=192.168.77.21 ansible_ssh_private_key_file=/vagrant/.vagrant/machines/kin-1/virtualbox/private_key
-kin-2  ansible_ssh_host=192.168.77.22 ansible_ssh_private_key_file=/vagrant/.vagrant/machines/kin-2/virtualbox/private_key
-
-
-[docker_ucp_controller]
+[docker_masters]
 mgmt
 
 

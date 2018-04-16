@@ -1,5 +1,0 @@
-- include: deploy-ohmyzsh.yml
-
-- include: deploy-docker.yml
-
-- include: deploy-ddc.yml
