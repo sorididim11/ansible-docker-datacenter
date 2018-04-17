@@ -8,10 +8,6 @@
 # something wrong with include_vars, if i use expresseion above directly here so. use variable using set_fact
 - include: "install-{{ansible_distribution}}.yml"
 
-- name: Install required utils for docker
-  package: name={{item}} state=present
-  with_items: "{{ docker_required_utils }}"
-
 
 - name: Create docker.service dropin directroy
   file: 
@@ -40,6 +36,7 @@
   template:
     src: daemon.json.in
     dest: /etc/docker/daemon.json
+    create: yes
 
 
 - name: Check if docker-proxy, docker-runc exist
