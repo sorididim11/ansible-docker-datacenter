@@ -14,6 +14,7 @@
     dest: /etc/yum/vars/dockerurl
     state: present
     line: "{{docker_ee_url}}/centos"
+    create: yes
   when: docker_package == 'docker-ee'
 
 
