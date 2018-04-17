@@ -36,7 +36,7 @@
   template:
     src: daemon.json.in
     dest: /etc/docker/daemon.json
-    create: yes
+  
 
 
 - name: Check if docker-proxy, docker-runc exist
