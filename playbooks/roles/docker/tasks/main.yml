@@ -32,12 +32,15 @@
   group: name=docker state=present
 
 
+- name: Create /etc/docker directory 
+  file: path=/etc/docker statue=directory
+
+
 - name: Generate docker daemon.json
   template:
     src: daemon.json.in
     dest: /etc/docker/daemon.json
   
-
 
 - name: Check if docker-proxy, docker-runc exist
   stat: path=/usr/libexec/docker
