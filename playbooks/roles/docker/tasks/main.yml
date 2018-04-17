@@ -19,7 +19,7 @@
 
 - name: Configure systemd to run the Docker Daemon with Http proxy 
   template:
-    src: http.conf.j2
+    src: http.conf.in
     dest: /etc/systemd/system/docker.service.d/http.conf
   when: proxy_env.http_proxy is defined
 
