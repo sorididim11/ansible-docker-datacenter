@@ -22,7 +22,7 @@
 - name: Add the YUM Docker repository in CentOS
   shell: "yum-config-manager --add-repo {{ docker_repo }}"
   args:
-    create: "{{ docker_package }}.repo"
+    creates: "{{ docker_package }}.repo"
 
 
 # - name: Add the YUM Docker repository in CentOS
