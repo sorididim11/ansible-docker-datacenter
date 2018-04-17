@@ -33,7 +33,7 @@
 
 # when docker service gets started, /etc/docker is created automatically but we created the dir manually not to call systemd task twice here.
 - name: Create /etc/docker directory 
-  file: path=/etc/docker statue=directory
+  file: path=/etc/docker state=directory
 
 
 - name: Generate docker daemon.json
