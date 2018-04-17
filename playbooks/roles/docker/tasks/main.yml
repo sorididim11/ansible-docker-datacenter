@@ -21,26 +21,6 @@
 # check kernal version here to check if overlay2 can be used
 
 
-- name: Generate docker daemon.json
-  template:
-    src: daemon.json.in
-    dest: /etc/docker/daemon.json
-
-
-# - name: Enable overlayfs
-#   lineinfile: dest=/etc/modules-load.d/overlay2.conf regexp="^overlay2" line=overlay2 state=present create=yes
-
-
-# - name: Load overyfs to kernel 
-#   modprobe: name=overlay2 state=present
-
-
-# - name: Configure systemd to run the Docker Daemon with OverlayFS
-#   template:
-#     src: override.conf.in
-#     dest: /etc/systemd/system/docker.service.d/override.conf
-
-
 - name: Configure systemd to run the Docker Daemon with Http proxy 
   template:
     src: http.conf.j2
@@ -54,6 +34,12 @@
 
 - name: Add nogroup, docker to group 
   group: name=docker state=present
+
+
+- name: Generate docker daemon.json
+  template:
+    src: daemon.json.in
+    dest: /etc/docker/daemon.json
 
 
 - name: Check if docker-proxy, docker-runc exist
