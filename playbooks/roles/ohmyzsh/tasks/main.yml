@@ -5,6 +5,7 @@
   
 
   - name: Install zsh 
+    become: yes
     package: name={{item}} state=present
     become_user: root
     with_items:
@@ -31,8 +32,7 @@
   
 
   - name: Chanage to zsh 
-    user:  "name={{ansible_user_id}} shell=/usr/bin/zsh"
     become: yes
-    become_user: root
+    user:  "name={{ansible_user_id}} shell=/usr/bin/zsh"    
 
  
