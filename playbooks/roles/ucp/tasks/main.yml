@@ -1,9 +1,0 @@
----
-
-# Variables setup
-
-- include: deploy-offline-install.yml 
-  when: is_ucp_offline_install
-  run_once: yes
-
-- include: deploy-ucp-cluster.yml

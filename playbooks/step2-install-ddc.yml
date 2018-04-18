@@ -1,0 +1,22 @@
+
+---
+
+- import_role: ddc/offline-install
+  when: is_ucp_offline_install is defined and is_ucp_offline_install == True
+
+
+- name: "Install UCP"
+  hosts: docker_ucp
+  become: yes
+  tags: ['ucp'] 
+  roles:
+    - { role: ddc/ucp, tags: ['ucp'] } 
+  environment: "{{ proxy_env }}"
+
+
+- name: "Install DTR"
+  hosts: docker_registry
+  become: yes
+  roles:
+    - { role: ddc/dtr, tags: ['dtr'] } 
+  environment: "{{ proxy_env }}"

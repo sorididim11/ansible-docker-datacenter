@@ -13,7 +13,7 @@
   copy:
     src: "{{ local_docker_ucp_subscription_file }}"
     dest: "{{ docker_ucp_subscription_file }}"
-  run_once: true
+
 
 
 - name: Install the first UCP controller.
@@ -28,7 +28,6 @@
         {% if docker_ucp_host_address is defined %}--host-address {{ docker_ucp_host_address }}{% endif %}
         {% if docker_ucp_san is defined %}{% for item in docker_ucp_san %}--san {{ item }} {% endfor %}{% endif %}
         {{ docker_ucp_extra_args }}
-  when: inventory_hostname == groups['docker_ucp_controller'][0] and ucp_controller['stdout'] == ""
 
 
 - name: Export the UCP instance ID.
@@ -37,8 +36,6 @@
         docker/ucp:{{ docker_ucp_version }} id
   register: ucp_instance_id
   changed_when: False
-  run_once: true
-
 
 
 - name: Dump the UCP controller root CA.
@@ -50,7 +47,6 @@
         creates={{ docker_ucp_backup_file }}
   register: ucp_backup
   changed_when: False
-  when: inventory_hostname == groups['docker_ucp_controller'][0]
 
 
 - name: Fetch the UCP root CA from the controller.
@@ -59,13 +55,11 @@
     dest: "{{ local_docker_ucp_backup_file }}"
     flat: yes
   become: no
-  run_once: true
   
 
 - name: Export the docker_ucp_controller_url fact if not defined.
   set_fact:
     docker_ucp_controller_url: "https://{{ docker_ucp_host_address }}:{{ docker_ucp_controller_port }}"
-  run_once: true
 
 
 - name: Export the UCP instance fingerprint.
@@ -74,8 +68,7 @@
         docker/ucp:{{ docker_ucp_version }} fingerprint
   register: ucp_instance_fingerprint
   changed_when: False
-  run_once: true
-
+  
 
 - name: Export the docker_ucp_fingerprint fact.
   set_fact:
