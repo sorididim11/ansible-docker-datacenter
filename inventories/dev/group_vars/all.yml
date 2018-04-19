@@ -19,7 +19,7 @@ docker_ucp_admin_password: hpinvent
 # docker_ucp_san: ucp.docker.lan
 docker_ucp_swarm_port: 2376
 docker_ucp_controller_port: 443
-docker_ucp_host_address: "{{ group['docker_masters'][0] }}"
+docker_ucp_host_address: "{{ groups['docker_masters'][0] }}"
 
 # ucp backup operation parameters
 docker_ucp_backup_passfrase: ""
