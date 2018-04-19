@@ -1,0 +1,9 @@
+---
+
+
+- name: "Install DTR"
+  hosts: docker_registry
+  become: yes
+  roles:
+    - { role: ddc/dtr, tags: ['dtr'] } 
+  environment: "{{ proxy_env }}"
