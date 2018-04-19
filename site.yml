@@ -5,3 +5,5 @@
 - include: playbooks/step2-deploy-ddc.yml
 
 - include: playbooks/step3-deploy-registry.yml
+
+- include: playbooks/op-ucp-backup.yml
