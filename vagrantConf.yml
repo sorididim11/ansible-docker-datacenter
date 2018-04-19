@@ -4,7 +4,7 @@ m1:
    name: master1
    ip: 10.0.15.21
    cpus: 4
-   mem: 4000
+   mem: 5000
    type: docker_masters
 
 s1:
