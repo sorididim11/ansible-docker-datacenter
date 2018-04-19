@@ -17,7 +17,7 @@ docker_ucp_subscription_file: "/root/docker_subscription.lic"
 
 docker_ucp_swarm_port: 2376
 docker_ucp_controller_port: 443
-docker_ucp_host_address: "{{ groups['docker_masters'][0] }}"
+docker_ucp_host_address: "{{ groups['docker_managers'][0] }}"
 #docker_ucp_controller_url: "ucp.docker.lan"
 
 docker_ucp_san:

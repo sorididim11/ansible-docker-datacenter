@@ -1,7 +1,7 @@
 ---
 
 - name: "Generate Backup of UCP"
-  hosts: docker_masters[0]
+  hosts: docker_managers[0]
   become: yes
   tags: ['ucp'] 
   roles:

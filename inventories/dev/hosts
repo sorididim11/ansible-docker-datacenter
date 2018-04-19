@@ -1,12 +1,19 @@
-[docker_masters]
+[docker_managers]
 10.0.15.21
 
-[docker_slaves]
+[docker_workers]
 10.0.15.31
+
+[docker_registries]
+10.0.15.21
+
+[docker_cluster_cli]
+10.0.15.11
 
 [docker_bootstrap]
 10.0.15.11
 
+
 [docker_nodes:children]
-docker_masters
-docker_slaves
+docker_managers
+docker_workers
