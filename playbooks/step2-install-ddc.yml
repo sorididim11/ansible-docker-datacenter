@@ -6,11 +6,29 @@
 
 
 - name: "Install UCP"
-  hosts: docker_ucp
+  hosts: docker_masters[0]
   become: yes
   tags: ['ucp'] 
   roles:
-    - { role: ddc/ucp, tags: ['ucp'] } 
+    - { role: ddc/ucp, ucp_command: install } 
+  environment: "{{ proxy_env }}"
+
+
+- name: "Deploy manager nodes"
+  hosts: docker_masters:!dcos_masters[0]
+  become: yes
+  serial: 1
+  roles:
+    - { role: node, swarm_command: join } 
+  environment: "{{ proxy_env }}"
+
+
+- name: "Deploy slave nodes"
+  hosts: docker_slaves
+  become: yes
+  serial: 1
+  roles:
+    - { role: node, swarm_command: join } 
   environment: "{{ proxy_env }}"
 
 

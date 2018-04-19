@@ -1,8 +1,5 @@
 ---
 
-# - debug:
-#     msg: "{{ hostvars[groups['docker_ucp_node'][0]].ansible_hostname}}"
-
 - name: Check if UCP is running on controllers.
   shell: docker ps -a --filter status=running --filter name=ucp-controller --format "{{ '{{' }}.ID{{ '}}' }}"
   changed_when: False
@@ -13,7 +10,6 @@
   copy:
     src: "{{ local_docker_ucp_subscription_file }}"
     dest: "{{ docker_ucp_subscription_file }}"
-
 
 
 - name: Install the first UCP controller.
@@ -57,11 +53,6 @@
   become: no
   
 
-- name: Export the docker_ucp_controller_url fact if not defined.
-  set_fact:
-    docker_ucp_controller_url: "https://{{ docker_ucp_host_address }}:{{ docker_ucp_controller_port }}"
-
-
 - name: Export the UCP instance fingerprint.
   shell: docker run --rm --name ucp
         -v /var/run/docker.sock:/var/run/docker.sock
@@ -73,26 +64,24 @@
 - name: Export the docker_ucp_fingerprint fact.
   set_fact:
     docker_ucp_fingerprint: "{{ ucp_instance_fingerprint['stdout'] }}"
-  run_once: true
   
   
-
-- name: Add Controller replicas to the UCP cluster.
-  shell: docker run --rm --name ucp
-        -v /var/run/docker.sock:/var/run/docker.sock
-        -v {{ docker_ucp_backup_file }}:/backup.tar
-        docker/ucp:{{ docker_ucp_version }} join --replica
-        --admin-username {{ docker_ucp_admin_username }}
-        --admin-password {{ docker_ucp_admin_password }}
-        --swarm-port {{ docker_ucp_swarm_port }}
-        --controller-port {{ docker_ucp_controller_port }}
-        {% if docker_ucp_host_address is defined %}--host-address {{ docker_ucp_host_address }}{% endif %}
-        {% if docker_ucp_san is defined %}{% for item in docker_ucp_san %}--san {{ item }} {% endfor %}{% endif %}
-        --url {{ docker_ucp_controller_url }}
-        --fingerprint {{ docker_ucp_fingerprint }}
-        {% if docker_ucp_backup_passfrase is defined and docker_ucp_backup_passfrase != "" %}--passfrase {{ docker_ucp_backup_passfrase }}{% endif %}
-  when: inventory_hostname != groups['docker_ucp_controller'][0]
-    and ucp_controller['stdout'] == ""
+# - name: Add Controller replicas to the UCP cluster.
+#   shell: docker run --rm --name ucp
+#         -v /var/run/docker.sock:/var/run/docker.sock
+#         -v {{ docker_ucp_backup_file }}:/backup.tar
+#         docker/ucp:{{ docker_ucp_version }} join --replica
+#         --admin-username {{ docker_ucp_admin_username }}
+#         --admin-password {{ docker_ucp_admin_password }}
+#         --swarm-port {{ docker_ucp_swarm_port }}
+#         --controller-port {{ docker_ucp_controller_port }}
+#         {% if docker_ucp_host_address is defined %}--host-address {{ docker_ucp_host_address }}{% endif %}
+#         {% if docker_ucp_san is defined %}{% for item in docker_ucp_san %}--san {{ item }} {% endfor %}{% endif %}
+#         --url {{ docker_ucp_controller_url }}
+#         --fingerprint {{ docker_ucp_fingerprint }}
+#         {% if docker_ucp_backup_passfrase is defined and docker_ucp_backup_passfrase != "" %}--passfrase {{ docker_ucp_backup_passfrase }}{% endif %}
+#   when: inventory_hostname != groups['docker_ucp_controller'][0]
+#     and ucp_controller['stdout'] == ""
 
 - name: Check if UCP is running on cluster nodes.
   shell: docker ps -a --filter status=running --filter name=ucp-swarm-join --format "{{ '{{' }}.ID{{ '}}' }}"
@@ -101,11 +90,11 @@
 
 
 # 한 루프에서 여러개의 태스크를 수행하기 위해 include 사용 
-- name: Bootstrap worker nodes to cluster 
-  include : join-ucp-cluster.yml  
-  with_items: "{{ groups['docker_ucp_node'] }}" 
-  run_once: true
-  ignore_errors: yes
+# - name: Bootstrap worker nodes to cluster 
+#   include : join-ucp-cluster.yml  
+#   with_items: "{{ groups['docker_ucp_node'] }}" 
+#   run_once: true
+#   ignore_errors: yes
    
   
 # - name: Deploy DTR

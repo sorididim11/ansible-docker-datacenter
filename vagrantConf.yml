@@ -1,11 +1,18 @@
 ---
 
 m1:
-   name: masters1
+   name: master1
    ip: 10.0.15.21
-   cpus: 2
-   mem: 2000
+   cpus: 4
+   mem: 4000
    type: docker_masters
+
+s1:
+   name: slave1
+   ip: 10.0.15.31
+   cpus: 4
+   mem: 4000
+   type: docker_slaves
 
 
 boot:

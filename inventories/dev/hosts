@@ -1,16 +1,11 @@
-[docker_ucp]
-10.0.15.21
-
 [docker_masters]
 10.0.15.21
 
 [docker_slaves]
+10.0.15.31
 
 [docker_bootstrap]
 10.0.15.11
-
-[docker_registry]
-10.0.15.21
 
 [docker_nodes:children]
 docker_masters

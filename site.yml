@@ -1,4 +1,4 @@
-- include: playbooks/deploy-ohmyzsh.yml
+- include: playbooks/util-install-ohmyzsh.yml
 
 - include: playbooks/step1-install-docker.yml
 
