@@ -1,4 +1,4 @@
 
 ---
 
-- include: "{{swarm_command}}-cluster"
+- include: "{{swarm_command}}-cluster.yml"

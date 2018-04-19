@@ -2,4 +2,6 @@
 
 - include: playbooks/step1-install-docker.yml
 
-- include: playbooks/step-2-deploy-ddc.yml
+- include: playbooks/step2-deploy-ddc.yml
+
+- include: playbooks/step3-deploy-registry.yml

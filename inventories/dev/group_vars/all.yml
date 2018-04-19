@@ -11,7 +11,7 @@ docker_storage_driver: overlay2
 local_docker_ucp_subscription_file: "files/docker_subscription.lic"
 docker_ucp_subscription_file: "/root/docker_subscription.lic"
 docker_ucp_version: 3.0.0
-docker_dtr_version: 2.1.3
+docker_dtr_version: 2.5.0
 docker_ucp_admin_username: admin
 docker_ucp_admin_password: hpinvent
 
@@ -20,7 +20,8 @@ docker_ucp_admin_password: hpinvent
 docker_ucp_swarm_port: 2376
 docker_ucp_controller_port: 443
 docker_ucp_host_address: "{{ groups['docker_masters'][0] }}"
-
+docker_ucp_controller_url: "https://{{ docker_ucp_host_address }}:{{ docker_ucp_controller_port }}"
+docker_dtr_external_url: "{{ groups['docker_registry'][0] }}"
 # ucp backup operation parameters
 docker_ucp_backup_passfrase: ""
 docker_ucp_backup_file: /tmp/ucp-backup.tar

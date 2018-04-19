@@ -5,26 +5,22 @@
 #     dest: /tmp/ucp-ca.pem
 #   delegate_to: "{{ item }}"
 
-- debug:
-    msg: "{{ item }}"
-
 
 - name: Check if DTR is running
   shell: docker ps -a --filter status=running --filter name=dtr-registry  --format "{{ '{{' }}.ID{{ '}}' }}"
   register: dtr_id
-  delegate_to: "{{item}}"
+
 
 
 - name: Install DTR 
   shell: docker run --rm --name dtr-registry
           docker/dtr:{{ docker_dtr_version }} install
-          --ucp-url {{ groups['docker_ucp_controller'][0]  }}   
-          --dtr-external-url {{ item }}
+          --ucp-url {{ docker_ucp_controller_url  }}   
+          --dtr-external-url {{ docker_dtr_external_url }}
           --ucp-username {{ docker_ucp_admin_username }}
           --ucp-password {{ docker_ucp_admin_password }} 
           --ucp-insecure-tls
-  delegate_to: "{{item}}"
-  when: item == groups['docker_dtr'][0] and dtr_id.stdout == ""
+  when: dtr_id.stdout == ""
 
   #--ucp-ca ${cat /tmp/ucp-ca.pem}
 

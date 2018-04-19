@@ -12,11 +12,11 @@
 
 
 - name: "Deploy manager nodes"
-  hosts: docker_masters:!dcos_masters[0]
+  hosts: docker_masters:!docker_masters[0]
   become: yes
   serial: 1
   roles:
-    - { role: node, swarm_command: join } 
+    - { role: node, swarm_command: join, swarm_role: manager } 
   environment: "{{ proxy_env }}"
 
 
@@ -25,13 +25,5 @@
   become: yes
   serial: 1
   roles:
-    - { role: node, swarm_command: join } 
-  environment: "{{ proxy_env }}"
-
-
-- name: "Install DTR"
-  hosts: docker_registry
-  become: yes
-  roles:
-    - { role: ddc/dtr, tags: ['dtr'] } 
+    - { role: node, swarm_command: join, swarm_role: worker } 
   environment: "{{ proxy_env }}"
