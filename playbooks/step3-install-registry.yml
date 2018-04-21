@@ -2,7 +2,7 @@
 
 
 - name: "Install DTR"
-  hosts: docker_registry
+  hosts: docker_registries
   become: yes
   roles:
     - { role: ddc/dtr, tags: ['dtr'] } 

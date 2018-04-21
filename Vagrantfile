@@ -16,14 +16,14 @@ end
 UI.info 'Create ansible dynamic inventory file...', bold: true
 inventory_file = 'inventories/dev/hosts'
 File.open(inventory_file, 'w') do |f|
-  %w(docker_masters docker_slaves docker_bootstrap).each do |section|
+  %w(docker_managers docker_workers docker_bootstrap).each do |section|
     f.puts("[#{section}]")
     settings.each do |_, machine_info|
       f.puts(machine_info['ip']) if machine_info['type'] == section
     end
     f.puts('')
   end
-  f.write("[docker_nodes:children]\ndocker_masters\ndocker_slaves")
+  f.write("[docker_nodes:children]\ndocker_managers\ndocker_workers")
 end
 
 Vagrant.configure('2') do |config|

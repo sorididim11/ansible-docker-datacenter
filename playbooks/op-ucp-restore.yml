@@ -1,0 +1,9 @@
+---
+
+- name: "Restore Backup of UCP"
+  hosts: docker_managers[0]
+  become: yes
+  tags: ['ucp'] 
+  roles:
+    - { role: ddc/ucp, ucp_command: restore } 
+  environment: "{{ proxy_env }}"
