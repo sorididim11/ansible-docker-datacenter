@@ -43,14 +43,14 @@ Vagrant.configure('2') do |config|
   config.cache.scope = :machine
   config.vbguest.auto_update = true
 
-  if Vagrant.has_plugin?('vagrant-proxyconf')
-    config.proxy.http = 'http://web-proxy.kor.hp.com:8080'
-    config.proxy.https = 'http://web-proxy.kor.hp.com:8080'
+  #if Vagrant.has_plugin?('vagrant-proxyconf')
+  #  config.proxy.http = 'http://web-proxy.kor.hp.com:8080'
+  #  config.proxy.https = 'http://web-proxy.kor.hp.com:8080'
 
-    no_proxy = 'localhost,127.0.0.1,' + settings.map { |_, v| "#{v['ip']},#{v['name']}" }.join(',')
-    UI.info "no proxies: #{no_proxy}"
-    config.proxy.no_proxy = no_proxy
-  end
+  #  no_proxy = 'localhost,127.0.0.1,' + settings.map { |_, v| "#{v['ip']},#{v['name']}" }.join(',')
+  #  UI.info "no proxies: #{no_proxy}"
+  #  config.proxy.no_proxy = no_proxy
+  # end
 
   settings.each do |name, machine_info|
     config.vm.define name do |node|
