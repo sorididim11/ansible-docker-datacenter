@@ -18,11 +18,10 @@
   when: docker_package == 'docker-ee'
 
 
-
 - name: Add the YUM Docker repository in CentOS
-  shell: "yum-config-manager --add-repo {{ docker_repo }}"
-  shell:
-      creates: "{{ docker_package }}.repo"
+  command: "yum-config-manager --add-repo {{ docker_repo }}"
+  args:
+    creates: "/etc/yum.repos.d/{{ docker_package }}.repo"
 
 
 # - name: Add the YUM Docker repository in CentOS
