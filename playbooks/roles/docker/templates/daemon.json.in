@@ -1,7 +1,5 @@
 {
-  "live-restore": true
   {% if docker_package == 'docker-ee' %}
-  ,
   "storage-driver": "{{ docker_storage_driver }}"
   {% if docker_storage_driver == 'overlay2'%}
   ,
@@ -10,5 +8,4 @@
   ]
   {% endif %}
   {% endif %}
-
 }
