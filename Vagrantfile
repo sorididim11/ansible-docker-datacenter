@@ -41,7 +41,7 @@ Vagrant.configure('2') do |config|
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
   config.cache.scope = :machine
-  config.vbguest.auto_update = true
+  # config.vbguest.auto_update = true
 
   if Vagrant.has_plugin?('vagrant-proxyconf')
     config.proxy.http = 'http://web-proxy.kor.hp.com:8080'
