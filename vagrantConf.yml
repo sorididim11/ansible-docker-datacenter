@@ -3,8 +3,8 @@
 m1:
    name: master1
    ip: 10.0.15.21
-   cpus: 4
-   mem: 5000
+   cpus: 2
+   mem: 1000
    type: docker_managers
 
 s1:

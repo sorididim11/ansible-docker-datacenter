@@ -12,3 +12,5 @@
 *.gz
 
 .DS_Store
+
+insecure_private_key
