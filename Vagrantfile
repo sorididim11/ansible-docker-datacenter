@@ -1,6 +1,7 @@
 require 'yaml'
 require 'vagrant/ui'
 
+
 UI = Vagrant::UI::Colored.new
 
 settings = YAML.load_file 'vagrantConf.yml'
@@ -29,9 +30,9 @@ end
 Vagrant.configure('2') do |config|
   config.vm.box = 'centos/7'
   config.ssh.insert_key = false
-  config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
+  config.vm.synced_folder '.', '/vagrant', type: 'sshfs'
 
-  required_plugins = %w( vagrant-hostmanager vagrant-cachier vagrant-vbguest )
+  required_plugins = %w( vagrant-sshfs vagrant-hostmanager vagrant-cachier vagrant-vbguest )
   required_plugins.each do |plugin|
     exec "vagrant plugin install #{plugin};vagrant #{ARGV.join(' ')}" unless Vagrant.has_plugin?(plugin) || ARGV[0] == 'plugin'
   end
