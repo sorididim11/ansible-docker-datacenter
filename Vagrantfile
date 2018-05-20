@@ -33,7 +33,7 @@ end
 Vagrant.configure('2') do |config|
   config.vm.box = 'centos/7'
   config.ssh.insert_key = false
-  config.vm.synced_folder '.', '/vagrant', type: 'sshfs'
+  config.vm.synced_folder '.', '/vagrant', type: 'nfs'
 
   required_plugins = %w( vagrant-sshfs vagrant-hostmanager vagrant-cachier vagrant-vbguest )
   required_plugins.each do |plugin|
@@ -47,10 +47,6 @@ Vagrant.configure('2') do |config|
   config.cache.scope = :box # :machine
   config.cache.synced_folder_opts = {
     type: :nfs,
-    # The nolock option can be useful for an NFSv3 client that wants to avoid the
-    # NLM sideband protocol. Without this option, apt-get might hang if it tries
-    # to lock files needed for /var/cache/* operations. All of this can be avoided
-    # by using NFSv4 everywhere. Please note that the tcp option is not the default.
     mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
   }
   # config.vbguest.auto_update = true
