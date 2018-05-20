@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 require 'yaml'
 require 'vagrant/ui'
 
@@ -41,7 +44,15 @@ Vagrant.configure('2') do |config|
   config.hostmanager.manage_guest = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-  config.cache.scope = :machine
+  config.cache.scope = :box # :machine
+  config.cache.synced_folder_opts = {
+    type: :nfs,
+    # The nolock option can be useful for an NFSv3 client that wants to avoid the
+    # NLM sideband protocol. Without this option, apt-get might hang if it tries
+    # to lock files needed for /var/cache/* operations. All of this can be avoided
+    # by using NFSv4 everywhere. Please note that the tcp option is not the default.
+    mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+  }
   # config.vbguest.auto_update = true
 
   #if Vagrant.has_plugin?('vagrant-proxyconf')
