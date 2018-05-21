@@ -33,7 +33,7 @@ end
 Vagrant.configure('2') do |config|
   config.vm.box = 'centos/7'
   config.ssh.insert_key = false
-  config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+  config.vm.synced_folder '.', '/vagrant', type: 'virtualbox'
 
   required_plugins = %w( vagrant-sshfs vagrant-hostmanager vagrant-cachier vagrant-vbguest )
   required_plugins.each do |plugin|
@@ -45,10 +45,6 @@ Vagrant.configure('2') do |config|
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
   config.cache.scope = :box # :machine
-  config.cache.synced_folder_opts = {
-    type: :nfs,
-    mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
-  }
   # config.vbguest.auto_update = true
 
   #if Vagrant.has_plugin?('vagrant-proxyconf')
